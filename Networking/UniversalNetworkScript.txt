@@ -1,0 +1,37 @@
+#!/bin/bash
+
+#some of these commands require "net-tools" to be installed
+
+#File setup
+networkFile="networkInfo_$(date '+%Y-%m-%d').txt"
+echo "Network Info below:" > "$networkFile"
+echo "****************************************" >> "$networkFile"
+
+#Ip address/interface details
+echo " " >> "$networkFile"
+echo "Current Configurations/Network interface:" >> "$networkFile"
+echo "****************************************" >> "$networkFile"
+echo " " "$networkFile"
+ip addr >> "$networkFile"
+
+#Kernel route table + ports & some
+echo " " >> "$networkFile"
+echo "Current Network route table + Ports:" >> "$networkFile"
+echo "****************************************" >> "$networkFile"
+echo " " >> "$networkFile"
+sudo netstat -tnlpr
+echo "Open ports" >> "$networkFile"
+echo "****************************************" >> "$networkFile"
+sudo netstat -tuln
+
+#DNS INFO
+echo " " >> "$networkFile"
+echo "DNS INFO" >> "$networkFile"
+echo "************************" >> "$networkFile"
+cat /etc/resolv.conf >> "$networkFile"
+
+cat "$networkFile"
+
+
+
+
